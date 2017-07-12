@@ -85,9 +85,15 @@ module.exports = function(app, passport, auth) {
     var avatars = require('../app/controllers/avatars');
     app.get('/avatars', avatars.allJSON);
 
-    //Home route
+    // Home route
     var index = require('../app/controllers/index');
     app.get('/play', index.play);
     app.get('/', index.render);
+
+    // ACME Challenge route
+    app.get('/.well-known/acme-challenge/randomstringhere',
+      function(req, res) {
+        res.send('challenge response here');
+      });
 
 };
